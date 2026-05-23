@@ -178,7 +178,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
     
     def serve_page(self):
         try:
-            with open("/tmp/code_fm/web/codejams.html") as f:
+            with open("/tmp/code_fm/web/codejams-v2.html") as f:
                 html = f.read()
         except FileNotFoundError:
             self.send_error(500, "HTML file not found")

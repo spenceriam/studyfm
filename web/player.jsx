@@ -59,11 +59,11 @@ function Visualizer({ active, side = 'left', bars = 14 }) {
   }, [active, bars, side]);
 
   return (
-    <div className="cj-viz" ref={ref} aria-hidden="true">
+    <div className={'cj-viz cj-viz--' + side} ref={ref} aria-hidden="true" data-state={active ? 'live' : 'idle'}>
       {Array.from({ length: bars }).map((_, i) => {
         const order = side === 'left' ? i : (bars - 1 - i);
         const delay = order * 22;
-        return <span key={i} style={{ '--d': `${delay}ms` }} />;
+        return <span key={i} style={{ '--d': delay + 'ms' }} />;
       })}
     </div>
   );
@@ -108,20 +108,19 @@ function Player() {
     if (audioRef.current) audioRef.current.volume = muted ? 0 : vol;
   }, [vol, muted]);
 
-  // Poll /status for real track info while live
+  // Poll /status continuously — independent of play state
   React.useEffect(() => {
-    if (state !== 'live') return;
     const poll = () => {
       fetch('/status').then(r => r.json()).then(s => {
-        if (s.track_title) setTrackTitle(s.track_title);
-        if (s.track_number) setTrackNumber(s.track_number);
-        if (s.block_name) setBlockName(s.block_name);
+        setTrackTitle(s.track_title || '');
+        setTrackNumber(s.track_number || 1);
+        setBlockName(s.block_name || '');
       }).catch(() => {});
     };
     poll();
     const id = setInterval(poll, 5000);
     return () => clearInterval(id);
-  }, [state]);
+  }, []);
 
   // Elapsed counter while live
   React.useEffect(() => {
@@ -202,11 +201,11 @@ function Player() {
             {statusText}
           </span>
         </div>
-        <div className="cj-telemetry" data-active={state === 'live' ? '1' : '0'}>
-          <span className="cj-telemetry__time">{tplus}</span>
-          {state === 'live' && trackTitle && (
+        <div className="cj-telemetry" data-active="1">
+          {state !== 'idle' && <span className="cj-telemetry__time">{tplus}</span>}
+          {trackTitle && (
             <>
-              <span className="cj-telemetry__pipe" aria-hidden="true">|</span>
+              {state !== 'idle' && <span className="cj-telemetry__pipe" aria-hidden="true">|</span>}
               <span className="cj-telemetry__tracknum">{String(trackNumber).padStart(2, '0')}</span>
               <span className="cj-telemetry__pipe" aria-hidden="true">|</span>
               <span className="cj-telemetry__trackname">{trackTitle}</span>
