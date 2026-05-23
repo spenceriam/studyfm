@@ -66,7 +66,7 @@
     }, [demo]);
     return hour;
   }
-  function Vinyl({ playing, sienna, duoShadow, duoHighlight, cream, blockNumber, blockName }) {
+  function Vinyl({ playing, sienna, duoShadow, duoHighlight, cream }) {
     return /* @__PURE__ */ React.createElement("div", { style: {
       width: "100%",
       height: "100%",
@@ -95,7 +95,7 @@
       borderRadius: "50%",
       overflow: "hidden",
       boxShadow: "inset 0 0 0 1px rgba(30,20,10,0.16)"
-    } }, /* @__PURE__ */ React.createElement(DuotonePhoto, { src: "assets/code.png", shadow: duoShadow, highlight: duoHighlight, id: "sp", contrast: 1.4, style: { width: "100%", height: "100%", transform: "scale(1.04)", transformOrigin: "50% 42%" } }), blockNumber ? React.createElement("div", { style: { position:"absolute", inset:0, display:"flex", flexDirection:"column", alignItems:"center", justifyContent:"center", pointerEvents:"none" } }, React.createElement("span", { style: { fontFamily:'"Oswald", Impact, sans-serif', fontWeight:700, fontSize:"clamp(22px, 5vw, 38px)", color:sienna, lineHeight:1, letterSpacing:"2px" } }, blockNumber), React.createElement("span", { style: { fontFamily:'"IBM Plex Mono", monospace', fontSize:"clamp(7px, 1.6vw, 10px)", color:sienna, opacity:0.55, letterSpacing:"1.5px", textTransform:"uppercase", marginTop:2, maxWidth:"70%" } }, blockName)) : null)), /* @__PURE__ */ React.createElement(
+    } }, /* @__PURE__ */ React.createElement(DuotonePhoto, { src: "assets/code.png", shadow: duoShadow, highlight: duoHighlight, id: "sp", contrast: 1.4, style: { width: "100%", height: "100%", transform: "scale(1.04)", transformOrigin: "50% 42%" } }))), /* @__PURE__ */ React.createElement(
       "svg",
       {
         viewBox: "0 0 200 200",
@@ -598,7 +598,7 @@
         audio.play().catch(() => setStatus("paused"));
       }
     }, [status]);
-    const [blockNumber, setBlockNumber] = React.useState(null); const [blockName, setBlockName] = React.useState(null); React.useEffect(function(){var p=function(){fetch("/status").then(function(r){return r.json()}).then(function(s){if(s.block_name){setBlockNumber(s.current_file.replace("block_",""));setBlockName(s.block_name)}}).catch(function(){})};p();var id=setInterval(p,5000);return function(){clearInterval(id)}},[]); const [volume, setVolume] = React.useState(0.7);
+    const [volume, setVolume] = React.useState(0.7);
     const [preMute, setPreMute] = React.useState(0.7);
     const muted = volume === 0;
     const toggleMute = () => {
@@ -699,7 +699,7 @@
       width: `${VINYL_R_VH * 2}vh`,
       height: `${VINYL_R_VH * 2}vh`,
       zIndex: 4
-    } }, /* @__PURE__ */ React.createElement(Vinyl, { playing, sienna, duoShadow, duoHighlight, cream, blockNumber, blockName })), /* @__PURE__ */ React.createElement("div", { style: {
+    } }, /* @__PURE__ */ React.createElement(Vinyl, { playing, sienna, duoShadow, duoHighlight, cream })), /* @__PURE__ */ React.createElement("div", { style: {
       position: "absolute",
       left: "50%",
       bottom: "max(3.5vh, 24px)",

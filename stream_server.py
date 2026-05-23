@@ -26,6 +26,24 @@ def get_blocks():
 ALL_BLOCKS = get_blocks()
 log(f"Found {len(ALL_BLOCKS)} blocks, {sum(os.path.getsize(b) for b in ALL_BLOCKS) / 1024 / 1024:.0f}MB total")
 
+# Load track manifest for display
+MANIFEST = {}
+try:
+    with open(f"{BLOCKS_DIR}/track_manifest.json") as f:
+        MANIFEST = json.load(f)
+    log(f"Loaded track manifest with {len(MANIFEST)} blocks")
+except FileNotFoundError:
+    log("No track_manifest.json found — track titles unavailable")
+
+# Load track boundaries for per-track display
+TRACK_BOUNDARIES = {}
+try:
+    with open(f"{BLOCKS_DIR}/track_boundaries.json") as f:
+        TRACK_BOUNDARIES = json.load(f)
+    log(f"Loaded track boundaries for {len(TRACK_BOUNDARIES)} blocks")
+except FileNotFoundError:
+    log("No track_boundaries.json found — per-track display unavailable")
+
 class LiveBroadcast:
     def __init__(self, block_paths):
         self.block_paths = block_paths
@@ -33,6 +51,7 @@ class LiveBroadcast:
         self.lock = threading.Lock()
         self.running = True
         self.current_file = "starting up..."
+        self.block_byte_offset = 0
         self.total_bytes = 0
         self.start_time = time.time()
         self.thread = threading.Thread(target=self._broadcast_loop, daemon=True)
@@ -71,6 +90,7 @@ class LiveBroadcast:
                 if not self.running:
                     return
                 self.current_file = os.path.basename(os.path.dirname(block_path))
+                self.block_byte_offset = 0
                 log(f"[Broadcast] Now playing: {self.current_file}")
                 
                 try:
@@ -80,6 +100,7 @@ class LiveBroadcast:
                             if not chunk:
                                 break
                             self.total_bytes += len(chunk)
+                            self.block_byte_offset += len(chunk)
                             
                             with self.lock:
                                 for q in list(self.listeners):
@@ -159,20 +180,54 @@ class Handler(http.server.BaseHTTPRequestHandler):
         except FileNotFoundError:
             self.send_error(500, "HTML file not found")
             return
+        # Inject current track info into the notch on page load
+        block_info = MANIFEST.get(broadcast.current_file, {})
+        boundaries = TRACK_BOUNDARIES.get(broadcast.current_file, {}).get("boundaries", [])
+        track_idx = 1
+        for byte_offset, tidx in reversed(boundaries):
+            if broadcast.block_byte_offset >= byte_offset:
+                track_idx = tidx
+                break
+        titles = block_info.get("titles", [])
+        track_title = titles[track_idx - 1] if track_idx <= len(titles) else ""
+        block_name = block_info.get("name", "")
+        if block_name and track_title:
+            notch = f"<b>0{track_idx}</b> <span style=\"opacity:0.6\">{block_name}</span> — {track_title}"
+        else:
+            notch = "Code.FM"
+        html = html.replace('>Code.FM</div>', f'>{notch}</div>')
         body = html.encode()
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.end_headers()
         self.wfile.write(body)
     
     def serve_status(self):
         elapsed = time.time() - broadcast.start_time
+        block_info = MANIFEST.get(broadcast.current_file, {})
+        
+        # Compute current track index from byte offset
+        track_idx = 1
+        boundaries = TRACK_BOUNDARIES.get(broadcast.current_file, {}).get("boundaries", [])
+        for byte_offset, tidx in reversed(boundaries):
+            if broadcast.block_byte_offset >= byte_offset:
+                track_idx = tidx
+                break
+        
+        titles = block_info.get("titles", [])
+        track_title = titles[track_idx - 1] if track_idx <= len(titles) else ""
+        
         body = json.dumps({
             "status": "live",
             "listeners": len(broadcast.listeners),
             "current_file": broadcast.current_file,
+            "block_name": block_info.get("name", ""),
+            "block_titles": titles,
+            "track_number": track_idx,
+            "track_title": track_title,
             "bytes_served": broadcast.total_bytes,
             "uptime_seconds": round(elapsed),
             "block_count": len(broadcast.block_paths),

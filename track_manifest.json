@@ -1,508 +1,202 @@
 {
-  "station": "Code.FM",
-  "model": "minimax-music-v26",
-  "total_blocks": 20,
-  "total_tracks": 100,
-  "blocks": {
-    "block_01": {
-      "name": "Flight Proven",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "First Stage Landing at Dusk"
-        },
-        {
-          "id": "track_02",
-          "title": "Moog in a Clean Room"
-        },
-        {
-          "id": "track_03",
-          "title": "Grid Fins Deploying"
-        },
-        {
-          "id": "track_04",
-          "title": "Telemetry Is Nominal"
-        },
-        {
-          "id": "track_05",
-          "title": "Droneship, We Have You"
-        }
-      ]
-    },
-    "block_02": {
-      "name": "Zero-G Drift",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Coffee Bubble in Microgravity"
-        },
-        {
-          "id": "track_02",
-          "title": "Sleeping Bag Velcro'd to the Wall"
-        },
-        {
-          "id": "track_03",
-          "title": "Cargo Transfer Daydream"
-        },
-        {
-          "id": "track_04",
-          "title": "Cupola at Night (No Talking)"
-        },
-        {
-          "id": "track_05",
-          "title": "Drifting Past the Canadarm"
-        }
-      ]
-    },
-    "block_03": {
-      "name": "Earth Analog",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Neon Over Vandenberg"
-        },
-        {
-          "id": "track_02",
-          "title": "Tape Deck on the ISS"
-        },
-        {
-          "id": "track_03",
-          "title": "Retrograde Sunset Cruise"
-        },
-        {
-          "id": "track_04",
-          "title": "Synthwave at Mach 25"
-        },
-        {
-          "id": "track_05",
-          "title": "Vapor Trail Self-Portrait"
-        }
-      ]
-    },
-    "block_04": {
-      "name": "Telemetry",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Packets From a Cold Gas Thruster"
-        },
-        {
-          "id": "track_02",
-          "title": "Bit Rate of a Distant Star"
-        },
-        {
-          "id": "track_03",
-          "title": "Housekeeping Data at 3 AM"
-        },
-        {
-          "id": "track_04",
-          "title": "Downlink Interrupted by Lightning"
-        },
-        {
-          "id": "track_05",
-          "title": "Kalman Filter Jazz"
-        }
-      ]
-    },
-    "block_05": {
-      "name": "Heavy Lift",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Twenty-Seven Engines Lit"
-        },
-        {
-          "id": "track_02",
-          "title": "Max Q Is Just a Feeling"
-        },
-        {
-          "id": "track_03",
-          "title": "Side Boosters Returning"
-        },
-        {
-          "id": "track_04",
-          "title": "Payload Fairing Separation"
-        },
-        {
-          "id": "track_05",
-          "title": "Stage Two, You're Clear"
-        }
-      ]
-    },
-    "block_06": {
-      "name": "Orbital Sunset",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Sixteen Sunrises Before Breakfast"
-        },
-        {
-          "id": "track_02",
-          "title": "Terminator Line Waltz"
-        },
-        {
-          "id": "track_03",
-          "title": "Earthshine Through a Porthole"
-        },
-        {
-          "id": "track_04",
-          "title": "Golden Hour at 408 Kilometers"
-        },
-        {
-          "id": "track_05",
-          "title": "The Atmosphere Glows Green"
-        }
-      ]
-    },
-    "block_07": {
-      "name": "Mars Surface",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Dust Devil on Sol 47"
-        },
-        {
-          "id": "track_02",
-          "title": "Perchlorate Regolith Blues"
-        },
-        {
-          "id": "track_03",
-          "title": "Olympus Mons Is Bigger Than You Think"
-        },
-        {
-          "id": "track_04",
-          "title": "No Signal in Jezero Crater"
-        },
-        {
-          "id": "track_05",
-          "title": "Sunset the Wrong Color"
-        }
-      ]
-    },
-    "block_08": {
-      "name": "Deep Space",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Voyager's Last Voltmeter Reading"
-        },
-        {
-          "id": "track_02",
-          "title": "Light Takes Four Years From Here"
-        },
-        {
-          "id": "track_03",
-          "title": "No Moving Parts, No Sound"
-        },
-        {
-          "id": "track_04",
-          "title": "Gravity Is Just Bent Geometry"
-        },
-        {
-          "id": "track_05",
-          "title": "Silence Between the Heliopause"
-        }
-      ]
-    },
-    "block_09": {
-      "name": "Re-Entry",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Plasma Sheath Five Minutes Long"
-        },
-        {
-          "id": "track_02",
-          "title": "Tiles Glowing White Hot"
-        },
-        {
-          "id": "track_03",
-          "title": "GPS Lock Reacquired"
-        },
-        {
-          "id": "track_04",
-          "title": "Supersonic Retropropulsion Dreams"
-        },
-        {
-          "id": "track_05",
-          "title": "Chutes at Ten Thousand Feet"
-        }
-      ]
-    },
-    "block_10": {
-      "name": "Mission Control",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Go for Launch, All Stations"
-        },
-        {
-          "id": "track_02",
-          "title": "Flight Director Sips Coffee"
-        },
-        {
-          "id": "track_03",
-          "title": "Acquisition of Signal Confirmed"
-        },
-        {
-          "id": "track_04",
-          "title": "CAPCOM Just Smiled"
-        },
-        {
-          "id": "track_05",
-          "title": "Booster Is Safely on Standby"
-        }
-      ]
-    },
-    "block_11": {
-      "name": "Approaching Dragon",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Closing Rate Zero Point One"
-        },
-        {
-          "id": "track_02",
-          "title": "Kurs Docking System Overture"
-        },
-        {
-          "id": "track_03",
-          "title": "Soft Capture Confirmed"
-        },
-        {
-          "id": "track_04",
-          "title": "Hatch Opening in T-Minus Twenty"
-        },
-        {
-          "id": "track_05",
-          "title": "Pressure Equalization Lullaby"
-        }
-      ]
-    },
-    "block_12": {
-      "name": "Forward Nostalgic",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Apollo 8 Christmas Eve Signal"
-        },
-        {
-          "id": "track_02",
-          "title": "Remembering a Rocket That Never Flew"
-        },
-        {
-          "id": "track_03",
-          "title": "Bruce McCandless Untethered"
-        },
-        {
-          "id": "track_04",
-          "title": "Postcards From Low Earth Orbit"
-        },
-        {
-          "id": "track_05",
-          "title": "The Future We Were Promised"
-        }
-      ]
-    },
-    "block_13": {
-      "name": "LC-39A",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Crawler-Transporter at Half a Mile Per Hour"
-        },
-        {
-          "id": "track_02",
-          "title": "Saturn V's Ghost Still Haunts the Pad"
-        },
-        {
-          "id": "track_03",
-          "title": "Flame Trench Baptism"
-        },
-        {
-          "id": "track_04",
-          "title": "Shuttle Era Tile Inspection"
-        },
-        {
-          "id": "track_05",
-          "title": "A New Rocket on Historic Ground"
-        }
-      ]
-    },
-    "block_14": {
-      "name": "Sputnik",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Beep Beep From Orbit"
-        },
-        {
-          "id": "track_02",
-          "title": "October 4, 1957, Everyone Panicked"
-        },
-        {
-          "id": "track_03",
-          "title": "Polished Sphere Reflecting Nothing"
-        },
-        {
-          "id": "track_04",
-          "title": "Shortwave Radio and a Dream"
-        },
-        {
-          "id": "track_05",
-          "title": "Korolev's Private Smile"
-        }
-      ]
-    },
-    "block_15": {
-      "name": "Andromeda",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Two Point Five Million Light-Year Commute"
-        },
-        {
-          "id": "track_02",
-          "title": "Sidechain Compression at Galactic Scale"
-        },
-        {
-          "id": "track_03",
-          "title": "Blueshift Means You're Getting Closer"
-        },
-        {
-          "id": "track_04",
-          "title": "Spiral Arms Made of Unanswered Questions"
-        },
-        {
-          "id": "track_05",
-          "title": "Collision Course, But Gently"
-        }
-      ]
-    },
-    "block_16": {
-      "name": "Starship",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Stainless Steel Cathedral"
-        },
-        {
-          "id": "track_02",
-          "title": "Raptor Engine Test Stand Meditation"
-        },
-        {
-          "id": "track_03",
-          "title": "Belly Flop Is a Controlled Fall"
-        },
-        {
-          "id": "track_04",
-          "title": "Header Tank Switchover Prayer"
-        },
-        {
-          "id": "track_05",
-          "title": "The Flame Trench Is Wider Now"
-        }
-      ]
-    },
-    "block_17": {
-      "name": "Island Three",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "One G at the Equator, Spin Up"
-        },
-        {
-          "id": "track_02",
-          "title": "Artificial Clouds, Real Rainfall"
-        },
-        {
-          "id": "track_03",
-          "title": "Farming Soybeans in a Rotating Cylinder"
-        },
-        {
-          "id": "track_04",
-          "title": "Windows Pointing at the Sun, Carefully"
-        },
-        {
-          "id": "track_05",
-          "title": "A River That Curves Upward"
-        }
-      ]
-    },
-    "block_18": {
-      "name": "Neon Sky",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Launch Pad Floodlights at Dawn"
-        },
-        {
-          "id": "track_02",
-          "title": "Contrail Painted by Sunrise"
-        },
-        {
-          "id": "track_03",
-          "title": "Gated Reverb on a Falcon Fairing"
-        },
-        {
-          "id": "track_04",
-          "title": "Pink and Orange Over the Atlantic"
-        },
-        {
-          "id": "track_05",
-          "title": "The Rocket Climbed Into the Neon"
-        }
-      ]
-    },
-    "block_19": {
-      "name": "Dragon Departure",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Last Wave Through the Cupola Glass"
-        },
-        {
-          "id": "track_02",
-          "title": "Undocking Burns Taste Like Salt"
-        },
-        {
-          "id": "track_03",
-          "title": "Deorbit Burn Is a Gentle Push"
-        },
-        {
-          "id": "track_04",
-          "title": "Goodbye Station, Hello Atmosphere"
-        },
-        {
-          "id": "track_05",
-          "title": "Parachutes Over the Gulf"
-        }
-      ]
-    },
-    "block_20": {
-      "name": "Starbase",
-      "tracks": [
-        {
-          "id": "track_01",
-          "title": "Welding at Midnight on the Rio Grande"
-        },
-        {
-          "id": "track_02",
-          "title": "Crane Operators Deserve a Monument"
-        },
-        {
-          "id": "track_03",
-          "title": "Serial Number Twenty-Something"
-        },
-        {
-          "id": "track_04",
-          "title": "Concrete Dust and Liquid Oxygen"
-        },
-        {
-          "id": "track_05",
-          "title": "The Stack Is Taller This Morning"
-        }
-      ]
-    }
+  "block_01": {
+    "name": "Flight Proven",
+    "titles": [
+      "First Stage Landing at Dusk",
+      "Moog in a Clean Room",
+      "Grid Fins Deploying",
+      "Telemetry Is Nominal",
+      "Droneship, We Have You"
+    ]
+  },
+  "block_02": {
+    "name": "Zero-G Drift",
+    "titles": [
+      "Coffee Bubble in Microgravity",
+      "Sleeping Bag Velcro'd to the Wall",
+      "Cargo Transfer Daydream",
+      "Cupola at Night (No Talking)",
+      "Drifting Past the Canadarm"
+    ]
+  },
+  "block_03": {
+    "name": "Earth Analog",
+    "titles": [
+      "Neon Over Vandenberg",
+      "Tape Deck on the ISS",
+      "Retrograde Sunset Cruise",
+      "Synthwave at Mach 25",
+      "Vapor Trail Self-Portrait"
+    ]
+  },
+  "block_04": {
+    "name": "Telemetry",
+    "titles": [
+      "Packets From a Cold Gas Thruster",
+      "Bit Rate of a Distant Star",
+      "Housekeeping Data at 3 AM",
+      "Downlink Interrupted by Lightning",
+      "Kalman Filter Jazz"
+    ]
+  },
+  "block_05": {
+    "name": "Heavy Lift",
+    "titles": [
+      "Twenty-Seven Engines Lit",
+      "Max Q Is Just a Feeling",
+      "Side Boosters Returning",
+      "Payload Fairing Separation",
+      "Stage Two, You're Clear"
+    ]
+  },
+  "block_06": {
+    "name": "Orbital Sunset",
+    "titles": [
+      "Sixteen Sunrises Before Breakfast",
+      "Terminator Line Waltz",
+      "Earthshine Through a Porthole",
+      "Golden Hour at 408 Kilometers",
+      "The Atmosphere Glows Green"
+    ]
+  },
+  "block_07": {
+    "name": "Mars Surface",
+    "titles": [
+      "Dust Devil on Sol 47",
+      "Perchlorate Regolith Blues",
+      "Olympus Mons Is Bigger Than You Think",
+      "No Signal in Jezero Crater",
+      "Sunset the Wrong Color"
+    ]
+  },
+  "block_08": {
+    "name": "Deep Space",
+    "titles": [
+      "Voyager's Last Voltmeter Reading",
+      "Light Takes Four Years From Here",
+      "No Moving Parts, No Sound",
+      "Gravity Is Just Bent Geometry",
+      "Silence Between the Heliopause"
+    ]
+  },
+  "block_09": {
+    "name": "Re-Entry",
+    "titles": [
+      "Plasma Sheath Five Minutes Long",
+      "Tiles Glowing White Hot",
+      "GPS Lock Reacquired",
+      "Supersonic Retropropulsion Dreams",
+      "Chutes at Ten Thousand Feet"
+    ]
+  },
+  "block_10": {
+    "name": "Mission Control",
+    "titles": [
+      "Go for Launch, All Stations",
+      "Flight Director Sips Coffee",
+      "Acquisition of Signal Confirmed",
+      "CAPCOM Just Smiled",
+      "Booster Is Safely on Standby"
+    ]
+  },
+  "block_11": {
+    "name": "Approaching Dragon",
+    "titles": [
+      "Closing Rate Zero Point One",
+      "Kurs Docking System Overture",
+      "Soft Capture Confirmed",
+      "Hatch Opening in T-Minus Twenty",
+      "Pressure Equalization Lullaby"
+    ]
+  },
+  "block_12": {
+    "name": "Forward Nostalgic",
+    "titles": [
+      "Apollo 8 Christmas Eve Signal",
+      "Remembering a Rocket That Never Flew",
+      "Bruce McCandless Untethered",
+      "Postcards From Low Earth Orbit",
+      "The Future We Were Promised"
+    ]
+  },
+  "block_13": {
+    "name": "LC-39A",
+    "titles": [
+      "Crawler-Transporter at Half a Mile Per Hour",
+      "Saturn V's Ghost Still Haunts the Pad",
+      "Flame Trench Baptism",
+      "Shuttle Era Tile Inspection",
+      "A New Rocket on Historic Ground"
+    ]
+  },
+  "block_14": {
+    "name": "Sputnik",
+    "titles": [
+      "Beep Beep From Orbit",
+      "October 4, 1957, Everyone Panicked",
+      "Polished Sphere Reflecting Nothing",
+      "Shortwave Radio and a Dream",
+      "Korolev's Private Smile"
+    ]
+  },
+  "block_15": {
+    "name": "Andromeda",
+    "titles": [
+      "Two Point Five Million Light-Year Commute",
+      "Sidechain Compression at Galactic Scale",
+      "Blueshift Means You're Getting Closer",
+      "Spiral Arms Made of Unanswered Questions",
+      "Collision Course, But Gently"
+    ]
+  },
+  "block_16": {
+    "name": "Starship",
+    "titles": [
+      "Stainless Steel Cathedral",
+      "Raptor Engine Test Stand Meditation",
+      "Belly Flop Is a Controlled Fall",
+      "Header Tank Switchover Prayer",
+      "The Flame Trench Is Wider Now"
+    ]
+  },
+  "block_17": {
+    "name": "Island Three",
+    "titles": [
+      "One G at the Equator, Spin Up",
+      "Artificial Clouds, Real Rainfall",
+      "Farming Soybeans in a Rotating Cylinder",
+      "Windows Pointing at the Sun, Carefully",
+      "A River That Curves Upward"
+    ]
+  },
+  "block_18": {
+    "name": "Neon Sky",
+    "titles": [
+      "Launch Pad Floodlights at Dawn",
+      "Contrail Painted by Sunrise",
+      "Gated Reverb on a Falcon Fairing",
+      "Pink and Orange Over the Atlantic",
+      "The Rocket Climbed Into the Neon"
+    ]
+  },
+  "block_19": {
+    "name": "Dragon Departure",
+    "titles": [
+      "Last Wave Through the Cupola Glass",
+      "Undocking Burns Taste Like Salt",
+      "Deorbit Burn Is a Gentle Push",
+      "Goodbye Station, Hello Atmosphere",
+      "Parachutes Over the Gulf"
+    ]
+  },
+  "block_20": {
+    "name": "Starbase",
+    "titles": [
+      "Welding at Midnight on the Rio Grande",
+      "Crane Operators Deserve a Monument",
+      "Serial Number Twenty-Something",
+      "Concrete Dust and Liquid Oxygen",
+      "The Stack Is Taller This Morning"
+    ]
   }
 }
