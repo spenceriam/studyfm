@@ -128,6 +128,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         '': 'application/octet-stream',
         '.html': 'text/html',
         '.js': 'application/javascript',
+        '.jsx': 'application/javascript',
         '.css': 'text/css',
         '.png': 'image/png',
         '.jpg': 'image/jpeg',
@@ -144,9 +145,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.serve_status()
         elif self.path == "/" or self.path == "/index.html":
             self.serve_page()
-        elif self.path.startswith("/assets/") or self.path.startswith("/vendor/"):
+        elif self.path == "/legacy":
+            self.serve_legacy()
+        elif self.path.startswith("/assets/") or self.path.startswith("/vendor/") or self.path.startswith("/uploads/"):
             self.serve_static(self.path)
-        elif self.path.endswith(".js"):
+        elif self.path.endswith(".js") or self.path.endswith(".jsx") or self.path.endswith(".css"):
             self.serve_static(self.path)
         else:
             self.send_error(404)
@@ -175,10 +178,27 @@ class Handler(http.server.BaseHTTPRequestHandler):
     
     def serve_page(self):
         try:
-            with open("/tmp/code_fm/web/Code.FM.html") as f:
+            with open("/tmp/code_fm/web/codejams.html") as f:
                 html = f.read()
         except FileNotFoundError:
             self.send_error(500, "HTML file not found")
+            return
+        body = html.encode()
+        self.send_response(200)
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+
+    def serve_legacy(self):
+        """Original Code.FM page with notch overlay (preserved for reference)."""
+        try:
+            with open("/tmp/code_fm/web/Code.FM.html") as f:
+                html = f.read()
+        except FileNotFoundError:
+            self.send_error(500, "Legacy HTML not found")
             return
         # Inject current track info into the notch on page load
         block_info = MANIFEST.get(broadcast.current_file, {})
