@@ -1,0 +1,17 @@
+# Generated music blocks (large binary files)
+blocks/block_*/track_*.mp3
+blocks/block_*/final_show.mp3
+blocks/block_*/concat_list.txt
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Logs
+*.log
+
+# Venice AI progress tracking
+progress.json
+
+# System
+.DS_Store

@@ -1,0 +1,509 @@
+{
+  "model": "minimax-music-v26",
+  "force_instrumental": true,
+  "format": "MP3 256kbps 44.1kHz stereo",
+  "blocks": {
+    "block_01": {
+      "name": "Flight Proven",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "D minor, 95 BPM, Space Ambient, IDM, cinematic, Moog bass synth, crisp electronic percussion, warm analog pads, wide stereo, space delays, clean mix, uplifting, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "D minor, 94 BPM, Cinematic Electronic, Downtempo, driving bassline, clean hi-hats, arpeggio layers, cosmic sweeps, analog warmth, high-tech, focused, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "G minor, 96 BPM, IDM, Progressive Ambient, pulsing sub-bass, sharp snare snaps, glistening synth plucks, echoing telemetry sounds, patient, futuristic, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "D minor, 93 BPM, Space Ambient, IDM, analog synth wash, side-chained bass, minimal percussion, distant radio chatter texture, awe-inspiring, vast, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "F major, 97 BPM, Cinematic Synthwave, Downtempo, bright analog lead, warm pads, four-on-the-floor soft kick, building arrangement, optimistic, anthemic, instrumental"
+        }
+      ]
+    },
+    "block_02": {
+      "name": "Zero-G Drift",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "A minor, 85 BPM, Ambient, Space Ambient, floating, weightless, slow-evolving synth pads, no drums, deep sub-bass drones, celestial echoes, serene, dreamy, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "A minor, 82 BPM, Ambient Drone, Dreamy Electronic, sparse piano-like synths, reverb tails, gentle noise textures, zero gravity feel, peaceful, meditative, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "C major, 88 BPM, Ambient Chillout, glass-like synth pads, soft acoustic electronic percussion, warm sub-bass, beautiful melodies, floating, resolution, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "A minor, 80 BPM, Dark Ambient, Space Drone, deep bass rumble, granular textures, distant star fields, minimal movement, patient, hypnotic, vast, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "E minor, 86 BPM, Ambient, Cinematic, slow attack synth strings, breathing pads, no percussion, pure atmosphere, sunrise over Earth, emotional, instrumental"
+        }
+      ]
+    },
+    "block_03": {
+      "name": "Earth Analog",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "C minor, 108 BPM, Synthwave, Retrowave, neon pads, analog arpeggios, gated snare, pulsing bass, retro sci-fi aesthetic, energetic, hopeful, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "C minor, 105 BPM, Cinematic Synthwave, Downtempo, bright analog leads, arpeggiator runs, warm Jupiter-style pads, driving beat, nostalgic, uplifting, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "Eb major, 110 BPM, Progressive Synthwave, four-on-the-floor kick, arpeggiated bass, shimmering pads, build and release, retro future, anthemic, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "C minor, 106 BPM, Space Synthwave, IDM crossover, analog drum machine, FM synth bells, cosmic reverb, patient but energetic, exploratory, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "G minor, 107 BPM, Retrowave, Chillwave, tape-warm synth, gentle sidechain, 80s drum machine, soft arpeggios, space exploration theme, wondrous, instrumental"
+        }
+      ]
+    },
+    "block_04": {
+      "name": "Telemetry",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "E minor, 100 BPM, IDM, Glitch, data-stream percussion, rapid hi-hats, pulsing sub-bass, digital clicks, telemetry beeps, space delays, analytical, precise, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "E minor, 102 BPM, Experimental Electronic, Glitch Hop, chopped drum patterns, bit-crushed textures, synth stabs, data transmission aesthetic, high-tech, rhythmic, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "B minor, 98 BPM, IDM, Downtempo, mechanical rhythms, analog synth blips, deep sub-bass pulses, modem-like chirps, counting clockwork, focused, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "E minor, 101 BPM, Minimal Electronic, Microhouse, precise percussion grid, soft synth wash, bass pulses, telemetry tracking, hypnotic, clean, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "F# minor, 99 BPM, IDM, Ambient Techno, glitchy hi-hats, warm pad undercurrent, sub-bass line, digital artifacts as texture, space control room, instrumental"
+        }
+      ]
+    },
+    "block_05": {
+      "name": "Heavy Lift",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "F minor, 95 BPM, Cinematic, Epic Electronic, orchestral synth swells, dramatic builds, thunderous sub drops, anticipation tension, rocket on pad, powerful, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "F minor, 93 BPM, Trailer Music, Cinematic Synthwave, building drums, heroic synth leads, tension and release, countdown energy, massive scale engineering, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "C minor, 97 BPM, Cinematic, Progressive Electronic, slow build, layered pads, rising arpeggios, powerful kick entrance, launch sequence, emotional, vast, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "F minor, 96 BPM, Epic, Cinematic Ambient, low brass synth drones, ticking clock percussion, building intensity, ignition moment, awe-inspiring, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "Bb minor, 94 BPM, Cinematic, Downtempo, heavy analog bass, dramatic pauses, re-ignition beats, massive rocket thrust, mechanical yet emotional, clean, instrumental"
+        }
+      ]
+    },
+    "block_06": {
+      "name": "Orbital Sunset",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "G minor, 90 BPM, Ambient Chillout, Downtempo, floating synth pads, gentle four-on-floor kick, celestial melody, Earth horizon, weightless, peaceful, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "G minor, 88 BPM, Dreamy Electronic, Space Ambient, glass-like arpeggios, soft bass pulse, reverb clouds, watching the planet below, serene, beautiful, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "D minor, 92 BPM, Ambient, Cinematic, slow-attack pad swells, gentle acoustic electronic drums, warm sub-bass, golden hour in orbit, emotional, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "G minor, 91 BPM, Chillout, IDM, clean electronic beat, warm pad chord progression, subtle delay tails, orbital tranquility, hypnotic, peaceful, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "Bb major, 89 BPM, Ambient, Dream Pop Electronic, shimmering synths, soft kick, bass warmth, sunset over terminator line, beautiful, hopeful, instrumental"
+        }
+      ]
+    },
+    "block_07": {
+      "name": "Mars Surface",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "C# minor, 75 BPM, Dark Ambient, Experimental, granular textures, deep bass drones, dust-wind delays, alien landscape, sparse percussion, mysterious, vast, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "C# minor, 72 BPM, Ambient, Cinematic, metallic resonance, slow filter sweeps, martian atmosphere, minimal beats, isolated, haunting beautiful, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "E minor, 78 BPM, Dark Electronic, Industrial Ambient, processed field recordings, distant rumbles, thin atmosphere synth, red planet, patient, desolate, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "C# minor, 74 BPM, Space Ambient, Drone, tectonic bass shifts, granular wind, glitch particles, no drums, pure alien environment, meditative, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "A minor, 76 BPM, Experimental, Ambient, distorted pads, radio static textures, slow pulse, martian sunrise, otherworldly, contemplative, instrumental"
+        }
+      ]
+    },
+    "block_08": {
+      "name": "Deep Space",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "D minor, 60 BPM, Dark Ambient, Drone, gravitational pull bass, no percussion, slow evolving textures, event horizon, infinite void, profound, minimal, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "D minor, 58 BPM, Space Drone, Cinematic, deep sub-bass waves, filter movement, distant star clusters, eternal darkness, patient, meditative, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "A minor, 62 BPM, Ambient, Dark Ambient, long reverb tails, breathing pad cycle, no beats, cosmic background radiation hum, deep meditation, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "D minor, 55 BPM, Drone, Experimental, analog oscillator drift, slow LFO modulation, black hole gravity, vast emptiness, minimal movement, profound, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "G minor, 64 BPM, Ambient, Space Music, processed piano tones, infinite sustain, no percussion, light years of silence, beautiful isolation, instrumental"
+        }
+      ]
+    },
+    "block_09": {
+      "name": "Re-Entry",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "A minor, 105 BPM, Progressive Electronic, Cinematic, bright analog lead, arpeggio runs, driving bassline, clean drums, re-entry plasma glow, focused, energetic, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "A minor, 107 BPM, Melodic Techno, Space Electronic, four-on-the-floor, building synth layers, controlled intensity, heat shield friction, determined, clean, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "D minor, 104 BPM, Progressive House, Cinematic, rolling bass, arpeggiated leads, crisp percussion, descending through atmosphere, triumphant, driving, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "A minor, 106 BPM, IDM, Downtempo, rhythmic synth bass, sharp snare snaps, glistening arpeggios, warm backing pads, re-entry burn, expectant, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "E minor, 103 BPM, Cinematic Electronic, Melodic, filter-swept leads, pumping bass, precision drums, parachute deploy moment, emotional release, instrumental"
+        }
+      ]
+    },
+    "block_10": {
+      "name": "Mission Control",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "Bb minor, 95 BPM, IDM, Cinematic, precise electronic percussion, telemetry bleeps, warm pads, analog synth bass, control room focus, mechanical yet emotional, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "Bb minor, 97 BPM, Downtempo, Ambient Techno, clean production, arpeggiated sequences, data-stream hi-hats, mission operations, patient, high-tech, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "Eb minor, 94 BPM, Minimal Electronic, IDM, crisp drum programming, sub-bass pulses, synth stabs, comms chatter texture, launch control center, focused, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "Bb minor, 96 BPM, Cinematic Electronic, Space Ambient crossover, warm analog washes, precise beats, telemetry tracking, human achievement, optimistic, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "F minor, 98 BPM, Progressive, IDM, building arrangement, clean mix, rhythmic bassline, celebration of success, mission complete, uplifting, anthemic, instrumental"
+        }
+      ]
+    },
+    "block_11": {
+      "name": "Approaching Dragon",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "D minor, 98 BPM, Cinematic Electronic, IDM, building tension, precise arpeggios, anticipatory snare rolls, warm pad undercurrent, docking sequence, focused, clean, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "D minor, 96 BPM, Progressive Electronic, Space Ambient crossover, arpeggiated synth sequences, clean electronic percussion, methodical approach, ISS rendezvous, patient, high-stakes, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "F major, 100 BPM, Cinematic Downtempo, bright analog leads, building drum patterns, tension and release, Dragon capsule final approach, emotional yet precise, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "D minor, 94 BPM, IDM, Minimal, crisp percussion grid, deep sub-bass pulses, telemetry bleeps, docking port alignment, clean mix, calculated, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "G minor, 97 BPM, Melodic Techno, four-on-the-floor, building synth layers, rising tension, capture confirmed, triumphant, cathartic release, instrumental"
+        }
+      ]
+    },
+    "block_12": {
+      "name": "Forward Nostalgic",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "Bb major, 88 BPM, Dreamy Electronic, Downtempo, floating synth pads, gentle arpeggios, soft kick, anticipation of new destination, weightless, hopeful, wide stereo, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "Bb major, 90 BPM, Ambient Chillout, Cinematic, glass-like synth melodies, warm bass pulse, space between stars, patient wonder, beautiful, exploratory, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "F major, 86 BPM, IDM, Downtempo, clean electronic beat, shimmering pad progression, subtle delay, moving through space toward something new, serene, optimistic, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "Bb major, 92 BPM, Progressive Electronic, arpeggiator sequences, soft percussion build, wide stereo field, cosmic drift, patient but purposeful, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "D minor, 84 BPM, Ambient, Cinematic, slow-attack string synths, gentle electronic pulses, vastness of space, profound calm, meditative, emotional, instrumental"
+        }
+      ]
+    },
+    "block_13": {
+      "name": "LC-39A",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "F major, 93 BPM, Cinematic, Epic Electronic, orchestral synth swells, sense of history, Apollo legacy, launch pad reverence, massive scale, awe-inspiring, clean, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "F major, 90 BPM, Cinematic Synthwave, heroic leads, building drums, pad 39A at sunrise, generations of exploration, nostalgic yet futuristic, powerful, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "C major, 95 BPM, Progressive Electronic, Cinematic, bright analog synths, rising arpeggios, clean percussion, Space Shuttle era warmth, historic achievement, uplifting, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "F major, 88 BPM, Ambient Cinematic, warm pad drones, subtle military drum patterns, Kennedy Space Center, hallowed ground, profound respect, patient, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "Bb major, 92 BPM, Downtempo, Cinematic, analog bass warmth, clean electronic beats, Falcon Heavy on historic pad, old meets new, bridge between eras, instrumental"
+        }
+      ]
+    },
+    "block_14": {
+      "name": "Sputnik",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "A minor, 100 BPM, Retrowave, Vintage Electronic, moog-style leads, theremin-like sweeps, retro space age, Sputnik beeps as texture, 1950s sci-fi aesthetic, nostalgic, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "A minor, 98 BPM, Synthwave, Experimental, analog oscillator tones, tape saturation warmth, vintage drum machines, first satellite era, pioneering spirit, historical, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "D minor, 102 BPM, IDM, Retrowave crossover, arpeggiated synth bass, crisp modern drums with vintage synth sounds, space race energy, determined, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "A minor, 95 BPM, Cinematic Electronic, theremin-inspired leads, old news broadcast samples as texture, 1957, dawn of space age, wonder, discovery, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "E minor, 97 BPM, Downtempo, Vintage Synth, warm analog pads, gentle electronic pulse, looking back at Sputnik from today, reflective, proud, instrumental"
+        }
+      ]
+    },
+    "block_15": {
+      "name": "Andromeda",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "D minor, 96 BPM, Melodic IDM, side-chained pulsing synth, deep space vibe, nearest galaxy neighbor, cosmic scale, clean production, driving but patient, distant, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "D minor, 94 BPM, Progressive Electronic, pulsing bass with sidechain compression, arpeggiated leads, shimmering pads, galactic approach, vast distances, hypnotic, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "A minor, 98 BPM, IDM, Downtempo, clean electronic drums, analog synth wash, Andromeda blueshift, moving toward collision, inevitable, beautiful, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "D minor, 92 BPM, Space Ambient, Cinematic Electronic, slow sidechain pulse, deep sub-bass, star fields, 2.5 million light years, profound isolation, meditative, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "G minor, 95 BPM, Ambient Techno, precise percussion, warm analog chords, light from another galaxy, ancient photons, wondrous, expansive, instrumental"
+        }
+      ]
+    },
+    "block_16": {
+      "name": "Starship",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "Eb major, 100 BPM, Cinematic Electronic, Modern IDM, clean digital production, stainless steel aesthetic, Starship stack on pad, next generation, ambitious scale, powerful, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "Eb major, 98 BPM, Progressive, Driving Electronic, crisp hi-hats, analog bass, Texas launch site energy, stainless steel reflections, dawn launch window, determined, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "Bb major, 102 BPM, Cinematic Synthwave, bright leads, four-on-the-floor, fully stacked Starship, human ambition, Mars-bound, hopeful, anthemic, clean, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "Eb major, 96 BPM, IDM, Space Electronic, mechanical precision sounds, grid fin textures, raptor engine test stand energy, engineering marvel, rhythmic, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "F major, 94 BPM, Downtempo, Cinematic, warm pads, building arrangement, Starship belly flop, controlled descent, reusability revolution, innovative, inspiring, instrumental"
+        }
+      ]
+    },
+    "block_17": {
+      "name": "Island Three",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "C major, 92 BPM, Ambient Electronic, optimistic pads, gentle percussion, O'Neill cylinder interior, artificial gravity spin, green spaces in space, hopeful future, beautiful, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "C major, 88 BPM, Downtempo, Cinematic, warm acoustic-inspired electronic tones, space colony habitat, Earth-like environment in void, serene, utopian vision, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "G major, 94 BPM, IDM, Chillout, clean beats, major key melodies, rotating space station, humans living in orbit, peaceful civilization, optimistic, bright, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "C major, 90 BPM, Progressive Electronic, arpeggiated sequences, soft kick pattern, terraformed interior, farmland under artificial sky, wondrous, hopeful, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "A minor, 86 BPM, Ambient, Cinematic, slow-building pads, gentle evolution, looking out colony window at stars, home away from Earth, emotional, profound, instrumental"
+        }
+      ]
+    },
+    "block_18": {
+      "name": "Neon Sky",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "F# minor, 110 BPM, Synthwave, Bright Retrowave, neon arpeggios, gated reverb snare, pink and orange sky palette, launch at dawn, energetic, vibrant, cinematic, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "F# minor, 108 BPM, Synthwave, Dreamwave, shimmering pads, arpeggiator runs, vapor trail colors, contrail against sunrise, beautiful, hopeful, nostalgic, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "A major, 112 BPM, Progressive Synthwave, four-on-the-floor, bright analog leads, gated snare, liftoff at golden hour, rocket climbing into neon clouds, anthemic, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "F# minor, 106 BPM, Chillwave, Synthwave crossover, tape-warm synths, gentle sidechain, dawn patrol launch, calm before ignition, reflective moment, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "B minor, 105 BPM, Retrowave, IDM, analog drum machine, FM synth melodies, exhaust plume illuminated by rising sun, spectacular view, wondrous, instrumental"
+        }
+      ]
+    },
+    "block_19": {
+      "name": "Dragon Departure",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "E minor, 90 BPM, Cinematic Electronic, bittersweet pads, soft percussion, Dragon undocking from ISS, departure ceremony, emotional farewell, beautiful sadness, clean, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "E minor, 86 BPM, Ambient, Downtempo, slow piano-like synth tones, astronauts saying goodbye, capsule drifting away from station, profound moment, reflective, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "G major, 92 BPM, IDM, Cinematic, clean beats, warm pad progression, solar arrays glinting, last look at station, heading home, hopeful melancholy, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "E minor, 88 BPM, Progressive Electronic, building arpeggio sequences, gentle rhythmic pulse, deorbit burn preparations, Earth approach, expectant, emotional arc, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "D major, 94 BPM, Melodic Electronic, bright leads, warm bassline, parachute deploy, splashdown imminent, journey's end, triumphant return, instrumental"
+        }
+      ]
+    },
+    "block_20": {
+      "name": "Starbase",
+      "tracks": [
+        {
+          "id": "track_01",
+          "prompt": "G minor, 98 BPM, Industrial Electronic, IDM, mechanical rhythms, construction sounds as texture, Starbase Texas, welding and building, productive energy, determined, rhythmic, instrumental"
+        },
+        {
+          "id": "track_02",
+          "prompt": "G minor, 96 BPM, Cinematic Electronic, Downtempo, deep bass pulses, crane and heavy machinery atmosphere, rocket factory, building the future, gritty yet optimistic, instrumental"
+        },
+        {
+          "id": "track_03",
+          "prompt": "Bb major, 100 BPM, Progressive, IDM, clean percussion, building sequences, assembly line precision, Starship serial numbers, iterative engineering, focused, high-tech, instrumental"
+        },
+        {
+          "id": "track_04",
+          "prompt": "G minor, 94 BPM, Ambient Industrial, processed field recording textures, metallic resonance, construction ambient, sunrise over production site, patient but purposeful, instrumental"
+        },
+        {
+          "id": "track_05",
+          "prompt": "D minor, 97 BPM, Driving Electronic, Cinematic, powerful bassline, determined drums, stacking the booster, reaching for orbit, human achievement, anthemic, clean, instrumental"
+        }
+      ]
+    }
+  },
+  "total_blocks": 20,
+  "total_tracks": 100
+}
