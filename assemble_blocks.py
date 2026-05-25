@@ -1,27 +1,17 @@
 #!/usr/bin/env python3
-"""Code.FM — Stitch 5 tracks per block into final_show.mp3 with 2s silence buffers"""
+"""Study.FM — Stitch 5 tracks per block into final_show.mp3 with gentle crossfades"""
 
 import subprocess, os, sys
 
-BLOCKS_DIR = "/tmp/code_fm"
-SILENCE_PATH = "/tmp/silence_2s.mp3"
+BLOCKS_DIR = "/tmp/study_fm"
 BLOCK_COUNT = 10
 TRACKS_PER = 5
-
-# Create 2s silence if missing
-if not os.path.exists(SILENCE_PATH):
-    subprocess.run([
-        "ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
-        "-t", "2", "-q:a", "9", "-acodec", "libmp3lame", SILENCE_PATH
-    ], check=True, capture_output=True)
-    print(f"Created {SILENCE_PATH}")
 
 built = 0
 for block_num in range(1, BLOCK_COUNT + 1):
     block_dir = f"{BLOCKS_DIR}/block_{block_num:02d}"
     outfile = f"{block_dir}/final_show.mp3"
     
-    # Collect tracks
     tracks = []
     for t in range(1, TRACKS_PER + 1):
         path = f"{block_dir}/track_{t:02d}.mp3"
@@ -48,24 +38,23 @@ for block_num in range(1, BLOCK_COUNT + 1):
         except:
             pass
     
-    if total_secs < 300:  # Must be at least 5 min
+    if total_secs < 300:
         print(f"Block {block_num:02d}: only {total_secs:.0f}s, skipping")
         continue
     
-    print(f"Block {block_num:02d}: stitching {len(tracks)} tracks ({total_secs:.0f}s total)...")
+    print(f"Block {block_num:02d}: stitching {len(tracks)} tracks ({total_secs:.0f}s total) with 4s crossfades...")
     
-    # Build concat file with crossfades
+    # Build concat file
     concat_list = f"{block_dir}/concat_list.txt"
     with open(concat_list, "w") as f:
         for tpath in tracks:
             f.write(f"file '{tpath}'\n")
-            f.write(f"file '{SILENCE_PATH}'\n")
     
     subprocess.run([
         "ffmpeg", "-y",
         "-f", "concat", "-safe", "0", "-i", concat_list,
         "-c:a", "libmp3lame", "-b:a", "192k",
-        "-filter_complex", "acrossfade=d=3:c1=tri:c2=tri",
+        "-filter_complex", "acrossfade=d=4:c1=tri:c2=tri",
         outfile
     ], check=True, capture_output=True)
     

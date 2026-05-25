@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Code.FM — SpaceX Livestream Ambient Station
+Study.FM — Library Study Music Station
 True Live Broadcast Server — all listeners hear the same position.
 """
 import os, time, queue, threading, random, json, http.server, socketserver
 
-BLOCKS_DIR = "/tmp/code_fm"
-PORT = 8898
+BLOCKS_DIR = "/tmp/study_fm"
+PORT = 8897
 BITRATE = 192000
 CHUNK_SIZE = 8192
 CHUNK_INTERVAL = CHUNK_SIZE / (BITRATE / 8)
@@ -83,6 +83,10 @@ class LiveBroadcast:
         while self.running:
             self.scan_for_new_blocks()
             blocks = list(self.block_paths)
+            if not blocks:
+                log("[Broadcast] No blocks found, will retry in 30s...")
+                time.sleep(30)
+                continue
             random.shuffle(blocks)
             log(f"[Broadcast] Shuffled {len(blocks)} blocks, starting live stream...")
             
@@ -139,23 +143,24 @@ class Handler(http.server.BaseHTTPRequestHandler):
         pass
     
     def do_GET(self):
-        if self.path == "/stream" or self.path == "/stream.mp3":
+        path = self.path.split("?")[0]  # strip cache-busting query strings
+        if path == "/stream" or path == "/stream.mp3":
             self.serve_stream()
-        elif self.path == "/status":
+        elif path == "/status":
             self.serve_status()
-        elif self.path == "/" or self.path == "/index.html":
+        elif path == "/" or path == "/index.html":
             self.serve_page()
-        elif self.path == "/legacy":
+        elif path == "/legacy":
             self.serve_legacy()
-        elif self.path.startswith("/assets/") or self.path.startswith("/vendor/") or self.path.startswith("/uploads/"):
-            self.serve_static(self.path)
-        elif self.path.endswith(".js") or self.path.endswith(".jsx") or self.path.endswith(".css"):
-            self.serve_static(self.path)
+        elif path.startswith("/compiled/") or path.startswith("/assets/") or path.startswith("/vendor/") or path.startswith("/uploads/"):
+            self.serve_static(path)
+        elif path.endswith(".js") or path.endswith(".css"):
+            self.serve_static(path)
         else:
             self.send_error(404)
     
     def serve_static(self, path):
-        file_path = "/tmp/code_fm/web" + path
+        file_path = "/tmp/study_fm/web" + path
         try:
             with open(file_path, "rb") as f:
                 content = f.read()
@@ -178,11 +183,28 @@ class Handler(http.server.BaseHTTPRequestHandler):
     
     def serve_page(self):
         try:
-            with open("/tmp/code_fm/web/codejams-v2.html") as f:
+            with open("/tmp/study_fm/web/studyfm.html") as f:
                 html = f.read()
         except FileNotFoundError:
             self.send_error(500, "HTML file not found")
             return
+        
+        # Inject current track info for first-paint data
+        block_info = MANIFEST.get(broadcast.current_file, {})
+        boundaries = TRACK_BOUNDARIES.get(broadcast.current_file, {}).get("boundaries", [])
+        track_idx = 1
+        for byte_offset, tidx in reversed(boundaries):
+            if broadcast.block_byte_offset >= byte_offset:
+                track_idx = tidx
+                break
+        titles = block_info.get("titles", [])
+        track_title = titles[track_idx - 1] if track_idx <= len(titles) else ""
+        block_name = block_info.get("name", "")
+        
+        initial = f'{{\n          "track_number": {track_idx},\n          "track_title": "{track_title}",\n          "block_name": "{block_name}",\n          "block_titles": {json.dumps(titles)},\n          "listeners": {len(broadcast.listeners)},\n          "uptime_seconds": {round(time.time() - broadcast.start_time)},\n          "block_count": {len(broadcast.block_paths)}\n        }}'
+        html = html.replace('/*INIT-BEGIN*/{"track_number": 0,"track_title": "","block_name": "","block_titles": [],"listeners": 0,"uptime_seconds": 0,"block_count": 0}/*INIT-END*/',
+                          f'/*INIT-BEGIN*/{initial}/*INIT-END*/')
+        
         body = html.encode()
         self.send_response(200)
         self.send_header("Content-Type", "text/html; charset=utf-8")
@@ -193,9 +215,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         self.wfile.write(body)
 
     def serve_legacy(self):
-        """Original Code.FM page with notch overlay (preserved for reference)."""
+        """Original Study.FM page with notch overlay (preserved for reference)."""
         try:
-            with open("/tmp/code_fm/web/Code.FM.html") as f:
+            with open("/tmp/study_fm/web/Study.FM.html") as f:
                 html = f.read()
         except FileNotFoundError:
             self.send_error(500, "Legacy HTML not found")
@@ -290,7 +312,7 @@ class ThreadedTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
 
 if __name__ == "__main__":
     log(f"\n{'='*50}")
-    log(f"Code.FM — SpaceX Livestream Ambient")
+    log(f"Study.FM — Library Study Music Station")
     log(f"{'='*50}")
     log(f"Web:    http://0.0.0.0:{PORT}/")
     log(f"Stream: http://0.0.0.0:{PORT}/stream")
