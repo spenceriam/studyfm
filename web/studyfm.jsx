@@ -1,6 +1,28 @@
 // StudyFM — bubbly music player + corner pomodoro
 const { useState, useEffect, useRef, useMemo } = React;
 
+// ── Tone alerts (mapped to /alerts/ files) ─────────────────────────────
+const FOCUS_TONES = [
+  { id: "meditation_bell",   label: "Meditation Bell" },
+  { id: "xylophone",         label: "Xylophone" },
+  { id: "singing_bowl",      label: "Singing Bowl" },
+  { id: "harp_glissando",    label: "Harp Glissando" },
+];
+const BREAK_TONES = [
+  { id: "wooden_block",      label: "Wooden Block" },
+  { id: "kalimba",           label: "Kalimba" },
+  { id: "wind_chimes",       label: "Wind Chimes" },
+  { id: "piano_chord",       label: "Piano Chord" },
+];
+
+function playTone(category, toneId) {
+  const a = new Audio(`/alerts/${category}_${toneId}.mp3`);
+  a.volume = 0.6;
+  a.play().catch(() => {});
+}
+
+const GENRES = ["All", "Lo-fi", "Piano", "Ambient", "Acoustic", "Nature", "Classical"];
+
 // ── palettes (light + dark variants per theme) ───────────────────────
 const THEMES = {
   bubblegum: {
@@ -241,15 +263,13 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
   const [connecting, setConnecting] = useState(false);
   const audioRef = useRef(null);
 
-  // Setup audio element on mount
+  // Setup audio from DOM element (survives hard refresh)
   useEffect(() => {
-    const a = document.createElement("audio");
-    a.crossOrigin = "anonymous";
-    a.preload = "none";
-    a.src = "/stream";
-    a.volume = volume;
-    audioRef.current = a;
-    return () => { a.pause(); a.removeAttribute("src"); };
+    const a = document.getElementById("studyfmAudio");
+    if (a) {
+      a.volume = volume;
+      audioRef.current = a;
+    }
   }, []);
 
   // Sync volume
@@ -281,7 +301,6 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
       setConnecting(false);
     } else {
       setConnecting(true);
-      a.load();
       a.play().then(() => {
         setPlaying(true);
         setConnecting(false);
@@ -310,6 +329,12 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
       </button>
 
       {gearOpen && <GearPanel t={t} setTweak={setTweak} onClose={openGear}/>}
+
+      {/* Genre selector */}
+      <select className="genre-select" value={t.genre || "All"}
+        onChange={e => setTweak("genre", e.target.value)}>
+        {GENRES.map(g => <option key={g} value={g}>{g}</option>)}
+      </select>
 
       <Visualizer kind={visualizer} playing={isActive} letter={letter}/>
 
@@ -429,11 +454,16 @@ function Pomodoro({ pom, setTweak }) {
       setRemaining((r) => {
         if (r <= 1) {
           setRunning(false);
+          // Play appropriate alert tone
+          const focusTone = (() => { try { return localStorage.getItem("studyfm-focus-tone") || "singing_bowl"; } catch { return "singing_bowl"; } })();
+          const breakTone = (() => { try { return localStorage.getItem("studyfm-break-tone") || "kalimba"; } catch { return "kalimba"; } })();
           if (mode === "focus") {
             setRound((n) => n + 1);
             const next = round % pom.longEvery === 0 ? "long" : "short";
+            playTone("focus", focusTone);
             setTimeout(() => setMode(next), 250);
           } else {
+            playTone("break", breakTone);
             setTimeout(() => setMode("focus"), 250);
           }
           return 0;
@@ -587,6 +617,17 @@ function Pomodoro({ pom, setTweak }) {
 }
 
 function PomSettings({ pom, setTweak, onClose }) {
+  const [focusTone, setFocusToneFn] = useState(() => {
+    try { return localStorage.getItem("studyfm-focus-tone") || "singing_bowl"; }
+    catch { return "singing_bowl"; }
+  });
+  const [breakTone, setBreakToneFn] = useState(() => {
+    try { return localStorage.getItem("studyfm-break-tone") || "kalimba"; }
+    catch { return "kalimba"; }
+  });
+  const setFocusTone = (id) => { setFocusToneFn(id); try { localStorage.setItem("studyfm-focus-tone", id); } catch {} };
+  const setBreakTone = (id) => { setBreakToneFn(id); try { localStorage.setItem("studyfm-break-tone", id); } catch {} };
+
   return (
     <div className="pom-settings" role="dialog" aria-label="Pomodoro settings">
       <div className="pom-settings-hd">
@@ -613,6 +654,29 @@ function PomSettings({ pom, setTweak, onClose }) {
           </button>
         ))}
         <span className="pom-cycle-suffix">rounds</span>
+      </div>
+
+      <div className="pom-settings-divider"/>
+
+      {/* ── Tone pickers ── */}
+      <div className="tone-section">
+        <div className="tone-label">🔔 Focus alert</div>
+        <div className="tone-row">
+          <select className="tone-select" value={focusTone} onChange={e => setFocusTone(e.target.value)}>
+            {FOCUS_TONES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
+          </select>
+          <button className="tone-preview" onClick={() => playTone("focus", focusTone)} aria-label="Preview focus tone">▶</button>
+        </div>
+      </div>
+
+      <div className="tone-section">
+        <div className="tone-label">🔔 Break alert</div>
+        <div className="tone-row">
+          <select className="tone-select" value={breakTone} onChange={e => setBreakTone(e.target.value)}>
+            {BREAK_TONES.map(t => <option key={t.id} value={t.id}>{t.label}</option>)}
+          </select>
+          <button className="tone-preview" onClick={() => playTone("break", breakTone)} aria-label="Preview break tone">▶</button>
+        </div>
       </div>
     </div>
   );

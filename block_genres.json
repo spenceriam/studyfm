@@ -1,0 +1,12 @@
+{
+  "block_01": {"name": "Quiet Stacks", "genre": "Lo-fi"},
+  "block_02": {"name": "Reading Room", "genre": "Piano"},
+  "block_03": {"name": "Window Seat", "genre": "Ambient"},
+  "block_04": {"name": "Coffee & Notes", "genre": "Acoustic"},
+  "block_05": {"name": "Archive Hour", "genre": "Ambient"},
+  "block_06": {"name": "Study Hall", "genre": "Lo-fi"},
+  "block_07": {"name": "Night Owl", "genre": "Lo-fi"},
+  "block_08": {"name": "Botanical Library", "genre": "Nature"},
+  "block_09": {"name": "Chamber Study", "genre": "Classical"},
+  "block_10": {"name": "Solo Cello", "genre": "Classical"}
+}

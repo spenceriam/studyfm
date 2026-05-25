@@ -6,6 +6,40 @@ const {
   useMemo
 } = React;
 
+// ── Tone alerts (mapped to /alerts/ files) ─────────────────────────────
+const FOCUS_TONES = [{
+  id: "meditation_bell",
+  label: "Meditation Bell"
+}, {
+  id: "xylophone",
+  label: "Xylophone"
+}, {
+  id: "singing_bowl",
+  label: "Singing Bowl"
+}, {
+  id: "harp_glissando",
+  label: "Harp Glissando"
+}];
+const BREAK_TONES = [{
+  id: "wooden_block",
+  label: "Wooden Block"
+}, {
+  id: "kalimba",
+  label: "Kalimba"
+}, {
+  id: "wind_chimes",
+  label: "Wind Chimes"
+}, {
+  id: "piano_chord",
+  label: "Piano Chord"
+}];
+function playTone(category, toneId) {
+  const a = new Audio(`/alerts/${category}_${toneId}.mp3`);
+  a.volume = 0.6;
+  a.play().catch(() => {});
+}
+const GENRES = ["All", "Lo-fi", "Piano", "Ambient", "Acoustic", "Nature", "Classical"];
+
 // ── palettes (light + dark variants per theme) ───────────────────────
 const THEMES = {
   bubblegum: {
@@ -405,18 +439,13 @@ function Player({
   const [connecting, setConnecting] = useState(false);
   const audioRef = useRef(null);
 
-  // Setup audio element on mount
+  // Setup audio from DOM element (survives hard refresh)
   useEffect(() => {
-    const a = document.createElement("audio");
-    a.crossOrigin = "anonymous";
-    a.preload = "none";
-    a.src = "/stream";
-    a.volume = volume;
-    audioRef.current = a;
-    return () => {
-      a.pause();
-      a.removeAttribute("src");
-    };
+    const a = document.getElementById("studyfmAudio");
+    if (a) {
+      a.volume = volume;
+      audioRef.current = a;
+    }
   }, []);
 
   // Sync volume
@@ -449,7 +478,6 @@ function Player({
       setConnecting(false);
     } else {
       setConnecting(true);
-      a.load();
       a.play().then(() => {
         setPlaying(true);
         setConnecting(false);
@@ -518,7 +546,14 @@ function Player({
     t: t,
     setTweak: setTweak,
     onClose: openGear
-  }), /*#__PURE__*/React.createElement(Visualizer, {
+  }), /*#__PURE__*/React.createElement("select", {
+    className: "genre-select",
+    value: t.genre || "All",
+    onChange: e => setTweak("genre", e.target.value)
+  }, GENRES.map(g => /*#__PURE__*/React.createElement("option", {
+    key: g,
+    value: g
+  }, g))), /*#__PURE__*/React.createElement(Visualizer, {
     kind: visualizer,
     playing: isActive,
     letter: letter
@@ -681,11 +716,28 @@ function Pomodoro({
       setRemaining(r => {
         if (r <= 1) {
           setRunning(false);
+          // Play appropriate alert tone
+          const focusTone = (() => {
+            try {
+              return localStorage.getItem("studyfm-focus-tone") || "singing_bowl";
+            } catch {
+              return "singing_bowl";
+            }
+          })();
+          const breakTone = (() => {
+            try {
+              return localStorage.getItem("studyfm-break-tone") || "kalimba";
+            } catch {
+              return "kalimba";
+            }
+          })();
           if (mode === "focus") {
             setRound(n => n + 1);
             const next = round % pom.longEvery === 0 ? "long" : "short";
+            playTone("focus", focusTone);
             setTimeout(() => setMode(next), 250);
           } else {
+            playTone("break", breakTone);
             setTimeout(() => setMode("focus"), 250);
           }
           return 0;
@@ -858,6 +910,32 @@ function PomSettings({
   setTweak,
   onClose
 }) {
+  const [focusTone, setFocusToneFn] = useState(() => {
+    try {
+      return localStorage.getItem("studyfm-focus-tone") || "singing_bowl";
+    } catch {
+      return "singing_bowl";
+    }
+  });
+  const [breakTone, setBreakToneFn] = useState(() => {
+    try {
+      return localStorage.getItem("studyfm-break-tone") || "kalimba";
+    } catch {
+      return "kalimba";
+    }
+  });
+  const setFocusTone = id => {
+    setFocusToneFn(id);
+    try {
+      localStorage.setItem("studyfm-focus-tone", id);
+    } catch {}
+  };
+  const setBreakTone = id => {
+    setBreakToneFn(id);
+    try {
+      localStorage.setItem("studyfm-break-tone", id);
+    } catch {}
+  };
   return /*#__PURE__*/React.createElement("div", {
     className: "pom-settings",
     role: "dialog",
@@ -901,7 +979,43 @@ function PomSettings({
     onClick: () => setTweak("longEvery", n)
   }, n)), /*#__PURE__*/React.createElement("span", {
     className: "pom-cycle-suffix"
-  }, "rounds")));
+  }, "rounds")), /*#__PURE__*/React.createElement("div", {
+    className: "pom-settings-divider"
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "tone-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tone-label"
+  }, "\uD83D\uDD14 Focus alert"), /*#__PURE__*/React.createElement("div", {
+    className: "tone-row"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "tone-select",
+    value: focusTone,
+    onChange: e => setFocusTone(e.target.value)
+  }, FOCUS_TONES.map(t => /*#__PURE__*/React.createElement("option", {
+    key: t.id,
+    value: t.id
+  }, t.label))), /*#__PURE__*/React.createElement("button", {
+    className: "tone-preview",
+    onClick: () => playTone("focus", focusTone),
+    "aria-label": "Preview focus tone"
+  }, "\u25B6"))), /*#__PURE__*/React.createElement("div", {
+    className: "tone-section"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "tone-label"
+  }, "\uD83D\uDD14 Break alert"), /*#__PURE__*/React.createElement("div", {
+    className: "tone-row"
+  }, /*#__PURE__*/React.createElement("select", {
+    className: "tone-select",
+    value: breakTone,
+    onChange: e => setBreakTone(e.target.value)
+  }, BREAK_TONES.map(t => /*#__PURE__*/React.createElement("option", {
+    key: t.id,
+    value: t.id
+  }, t.label))), /*#__PURE__*/React.createElement("button", {
+    className: "tone-preview",
+    onClick: () => playTone("break", breakTone),
+    "aria-label": "Preview break tone"
+  }, "\u25B6"))));
 }
 function PomSlider({
   label,

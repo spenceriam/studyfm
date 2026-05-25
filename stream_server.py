@@ -152,12 +152,46 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.serve_page()
         elif path == "/legacy":
             self.serve_legacy()
-        elif path.startswith("/compiled/") or path.startswith("/assets/") or path.startswith("/vendor/") or path.startswith("/uploads/"):
+        elif path.startswith("/genre"):
+            self.serve_genre(path)
+        elif path.startswith("/compiled/") or path.startswith("/assets/") or path.startswith("/vendor/") or path.startswith("/uploads/") or path.startswith("/alerts/"):
             self.serve_static(path)
         elif path.endswith(".js") or path.endswith(".css"):
             self.serve_static(path)
         else:
             self.send_error(404)
+    
+    def serve_genre(self, path):
+        """Return block-genre mapping + filtered stream list"""
+        try:
+            with open("/tmp/study_fm/block_genres.json") as f:
+                genres = json.load(f)
+        except FileNotFoundError:
+            genres = {}
+        
+        # /genre/list — full mapping
+        if path == "/genre/list":
+            body = json.dumps(genres).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        
+        # /genre/{name} — return block IDs matching genre
+        genre_name = path.split("/genre/")[-1] if "/genre/" in path else ""
+        if genre_name and genre_name != "All":
+            matching = [bid for bid, info in genres.items() if info.get("genre") == genre_name]
+        else:
+            matching = list(genres.keys())
+        
+        body = json.dumps({"genre": genre_name, "blocks": matching}).encode()
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
     
     def serve_static(self, path):
         file_path = "/tmp/study_fm/web" + path

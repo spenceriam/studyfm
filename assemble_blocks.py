@@ -1,11 +1,20 @@
 #!/usr/bin/env python3
-"""Study.FM — Stitch 5 tracks per block into final_show.mp3 with gentle crossfades"""
+"""Study.FM — Stitch 5 tracks per block into final_show.mp3 with 2s silence buffers"""
 
 import subprocess, os, sys
 
 BLOCKS_DIR = "/tmp/study_fm"
+SILENCE_PATH = "/tmp/silence_2s.mp3"
 BLOCK_COUNT = 10
 TRACKS_PER = 5
+
+# Create 2s silence if missing
+if not os.path.exists(SILENCE_PATH):
+    subprocess.run([
+        "ffmpeg", "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
+        "-t", "2", "-q:a", "9", "-acodec", "libmp3lame", SILENCE_PATH
+    ], check=True, capture_output=True)
+    print(f"Created {SILENCE_PATH}")
 
 built = 0
 for block_num in range(1, BLOCK_COUNT + 1):
@@ -26,7 +35,6 @@ for block_num in range(1, BLOCK_COUNT + 1):
         print(f"Block {block_num:02d}: only {len(tracks)}/{TRACKS_PER} tracks, skipping")
         continue
     
-    # Check total duration
     total_secs = 0
     for tpath in tracks:
         result = subprocess.run([
@@ -42,19 +50,19 @@ for block_num in range(1, BLOCK_COUNT + 1):
         print(f"Block {block_num:02d}: only {total_secs:.0f}s, skipping")
         continue
     
-    print(f"Block {block_num:02d}: stitching {len(tracks)} tracks ({total_secs:.0f}s total) with 4s crossfades...")
+    print(f"Block {block_num:02d}: stitching {len(tracks)} tracks ({total_secs:.0f}s total) with 2s silence...")
     
-    # Build concat file
     concat_list = f"{block_dir}/concat_list.txt"
     with open(concat_list, "w") as f:
-        for tpath in tracks:
+        for i, tpath in enumerate(tracks):
             f.write(f"file '{tpath}'\n")
+            if i < len(tracks) - 1:
+                f.write(f"file '{SILENCE_PATH}'\n")
     
     subprocess.run([
         "ffmpeg", "-y",
         "-f", "concat", "-safe", "0", "-i", concat_list,
         "-c:a", "libmp3lame", "-b:a", "192k",
-        "-filter_complex", "acrossfade=d=4:c1=tri:c2=tri",
         outfile
     ], check=True, capture_output=True)
     
