@@ -56,6 +56,7 @@ class LiveBroadcast:
         self.start_time = time.time()
         self.genre_filter = None   # None = all genres
         self.skip_current = False
+        self.needs_reshuffle = False
         self.thread = threading.Thread(target=self._broadcast_loop, daemon=True)
         self.thread.start()
     
@@ -101,6 +102,7 @@ class LiveBroadcast:
     def _broadcast_loop(self):
         while self.running:
             self.scan_for_new_blocks()
+            self.needs_reshuffle = False
             blocks = self.filter_by_genre(list(self.block_paths))
             if not blocks:
                 log(f"[Broadcast] No blocks for genre '{self.genre_filter or 'All'}', will retry in 30s...")
@@ -112,6 +114,9 @@ class LiveBroadcast:
             for block_path in blocks:
                 if not self.running:
                     return
+                if self.needs_reshuffle:
+                    log(f"[Broadcast] Reshuffle triggered (genre/skip) → reshuffling blocks")
+                    break
                 self.current_file = os.path.basename(os.path.dirname(block_path))
                 self.block_byte_offset = 0
                 log(f"[Broadcast] Now playing: {self.current_file}")
@@ -201,8 +206,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
             if "genre=" in qs:
                 genre_name = qs.split("genre=")[-1].split("&")[0]
             broadcast.genre_filter = genre_name
-            broadcast.skip_current = True  # force reshuffle with new filter
-            log(f"[Genre] Set filter to '{genre_name}' — skipping to reshuffle")
+            broadcast.skip_current = True
+            broadcast.needs_reshuffle = True  # break out of both loops + re-filter
+            log(f"[Genre] Set filter to '{genre_name}' — forcing reshuffle with new filter")
             body = json.dumps({"genre": genre_name, "status": "ok"}).encode()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
