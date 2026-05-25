@@ -332,7 +332,10 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
 
       {/* Genre selector */}
       <select className="genre-select" value={t.genre || "All"}
-        onChange={e => setTweak("genre", e.target.value)}>
+        onChange={e => {
+          setTweak("genre", e.target.value);
+          fetch(`/genre/select?genre=${encodeURIComponent(e.target.value)}`).catch(() => {});
+        }}>
         {GENRES.map(g => <option key={g} value={g}>{g}</option>)}
       </select>
 
@@ -345,6 +348,7 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
 
       {/* Transport */}
       <div className="transport">
+        <button className="ctl" onClick={() => fetch("/next").catch(() => {})} aria-label="Skip track">↻</button>
         <button className="ctl play" onClick={togglePlay} aria-label={playing ? "Pause" : "Play"}>
           {connecting ? (
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{animation: "spin 1s linear infinite"}}>
@@ -352,6 +356,7 @@ function Player({ visualizer, openGear, gearOpen, t, setTweak }) {
             </svg>
           ) : playing ? I.pause : I.play}
         </button>
+        <button className="ctl" onClick={() => fetch("/next").catch(() => {})} aria-label="Skip track">↻</button>
       </div>
 
       {/* Volume row */}

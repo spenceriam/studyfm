@@ -54,8 +54,27 @@ class LiveBroadcast:
         self.block_byte_offset = 0
         self.total_bytes = 0
         self.start_time = time.time()
+        self.genre_filter = None   # None = all genres
+        self.skip_current = False
         self.thread = threading.Thread(target=self._broadcast_loop, daemon=True)
         self.thread.start()
+    
+    def load_genres(self):
+        try:
+            with open("/tmp/study_fm/block_genres.json") as f:
+                return json.load(f)
+        except:
+            return {}
+    
+    def filter_by_genre(self, blocks):
+        if not self.genre_filter or self.genre_filter == "All":
+            return blocks
+        genres = self.load_genres()
+        matching = set()
+        for bid, info in genres.items():
+            if info.get("genre") == self.genre_filter:
+                matching.add(bid)
+        return [b for b in blocks if os.path.basename(os.path.dirname(b)) in matching]
     
     def add_listener(self):
         q = queue.Queue(maxsize=200)
@@ -82,9 +101,9 @@ class LiveBroadcast:
     def _broadcast_loop(self):
         while self.running:
             self.scan_for_new_blocks()
-            blocks = list(self.block_paths)
+            blocks = self.filter_by_genre(list(self.block_paths))
             if not blocks:
-                log("[Broadcast] No blocks found, will retry in 30s...")
+                log(f"[Broadcast] No blocks for genre '{self.genre_filter or 'All'}', will retry in 30s...")
                 time.sleep(30)
                 continue
             random.shuffle(blocks)
@@ -100,6 +119,10 @@ class LiveBroadcast:
                 try:
                     with open(block_path, "rb") as f:
                         while self.running:
+                            if self.skip_current:
+                                self.skip_current = False
+                                log(f"[Broadcast] Skip requested → advancing to next block")
+                                break
                             chunk = f.read(CHUNK_SIZE)
                             if not chunk:
                                 break
@@ -148,6 +171,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.serve_stream()
         elif path == "/status":
             self.serve_status()
+        elif path == "/next":
+            self.serve_next()
         elif path == "/" or path == "/index.html":
             self.serve_page()
         elif path == "/legacy":
@@ -162,15 +187,32 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.send_error(404)
     
     def serve_genre(self, path):
-        """Return block-genre mapping + filtered stream list"""
+        """Return block-genre mapping + handle genre selection and filtered blocks"""
         try:
             with open("/tmp/study_fm/block_genres.json") as f:
                 genres = json.load(f)
         except FileNotFoundError:
             genres = {}
         
+        # /genre/select?genre=Name — set active genre filter
+        if path.startswith("/genre/select"):
+            qs = self.path.split("?")[-1] if "?" in self.path else ""
+            genre_name = "All"
+            if "genre=" in qs:
+                genre_name = qs.split("genre=")[-1].split("&")[0]
+            broadcast.genre_filter = genre_name
+            broadcast.skip_current = True  # force reshuffle with new filter
+            log(f"[Genre] Set filter to '{genre_name}' — skipping to reshuffle")
+            body = json.dumps({"genre": genre_name, "status": "ok"}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        
         # /genre/list — full mapping
-        if path == "/genre/list":
+        if path == "/genre/list" or path == "/genre/list/":
             body = json.dumps(genres).encode()
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
@@ -179,7 +221,17 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(body)
             return
         
-        # /genre/{name} — return block IDs matching genre
+        # /genre/current — current filter
+        if path == "/genre/current":
+            body = json.dumps({"genre": broadcast.genre_filter or "All"}).encode()
+            self.send_response(200)
+            self.send_header("Content-Type", "application/json")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        
+        # /genre/{name} — return block IDs matching genre (for debug)
         genre_name = path.split("/genre/")[-1] if "/genre/" in path else ""
         if genre_name and genre_name != "All":
             matching = [bid for bid, info in genres.items() if info.get("genre") == genre_name]
@@ -187,6 +239,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
             matching = list(genres.keys())
         
         body = json.dumps({"genre": genre_name, "blocks": matching}).encode()
+        self.send_response(200)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.end_headers()
+        self.wfile.write(body)
+    
+    def serve_next(self):
+        """Skip to next block"""
+        broadcast.skip_current = True
+        body = json.dumps({"status": "skipping", "current": broadcast.current_file}).encode()
         self.send_response(200)
         self.send_header("Content-Type", "application/json")
         self.send_header("Access-Control-Allow-Origin", "*")

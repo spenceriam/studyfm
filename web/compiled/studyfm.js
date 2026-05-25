@@ -549,7 +549,10 @@ function Player({
   }), /*#__PURE__*/React.createElement("select", {
     className: "genre-select",
     value: t.genre || "All",
-    onChange: e => setTweak("genre", e.target.value)
+    onChange: e => {
+      setTweak("genre", e.target.value);
+      fetch(`/genre/select?genre=${encodeURIComponent(e.target.value)}`).catch(() => {});
+    }
   }, GENRES.map(g => /*#__PURE__*/React.createElement("option", {
     key: g,
     value: g
@@ -564,6 +567,10 @@ function Player({
   }, titleText), /*#__PURE__*/React.createElement("div", {
     className: "transport"
   }, /*#__PURE__*/React.createElement("button", {
+    className: "ctl",
+    onClick: () => fetch("/next").catch(() => {}),
+    "aria-label": "Skip track"
+  }, "\u21BB"), /*#__PURE__*/React.createElement("button", {
     className: "ctl play",
     onClick: togglePlay,
     "aria-label": playing ? "Pause" : "Play"
@@ -580,7 +587,11 @@ function Player({
     d: "M21 12a9 9 0 1 1-6.219-8.56"
   }), /*#__PURE__*/React.createElement("path", {
     d: "M21 3v6h-6"
-  })) : playing ? I.pause : I.play)), /*#__PURE__*/React.createElement("div", {
+  })) : playing ? I.pause : I.play), /*#__PURE__*/React.createElement("button", {
+    className: "ctl",
+    onClick: () => fetch("/next").catch(() => {}),
+    "aria-label": "Skip track"
+  }, "\u21BB")), /*#__PURE__*/React.createElement("div", {
     className: "volrow"
   }, /*#__PURE__*/React.createElement("button", {
     className: "ctl volbtn",
